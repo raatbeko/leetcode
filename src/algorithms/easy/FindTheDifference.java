@@ -5,7 +5,8 @@ import java.util.Map;
 
 public class FindTheDifference {
     public static void main(String[] args) {
-        System.out.println(findTheDifference("ata", "ata"));
+        int num = 0;
+        System.out.println(++num);
     }
 
     private static char findTheDifference(String s, String t) {
