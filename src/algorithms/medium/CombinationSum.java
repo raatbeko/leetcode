@@ -6,37 +6,33 @@ import java.util.List;
 
 public class CombinationSum {
 
-    private static List<List<Integer>> combinationSum(int[] can, int target) {
-        Arrays.sort(can);
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
         List<List<Integer>> lists = new ArrayList<>();
-        lists.add(new ArrayList<>());
-        sum(can, target, 0, lists, 0, 0);
+        sum(candidates, target, 0, lists, new ArrayList<>(), 0);
         return lists;
     }
 
-    private static int sum(int[] can, int target, int arrayIndex, List<List<Integer>> lists, int currentListIndex, int lastSum) {
-        List<Integer> integers = lists.get(currentListIndex);
+    private static void sum(int[] can, int target, int arrayIndex, List<List<Integer>> lists, List<Integer> currentListIndex, int lastSum) {
+        int actualSum = lastSum;
         for (int i = arrayIndex; i < can.length; i++) {
-            if (lastSum < target) {
-                lastSum += can[i];
-                integers.add(can[i]);
-                int sum = sum(can, target, i, lists, currentListIndex, lastSum);
-                if (sum > target) {
-                    integers.remove(can[i]);
-                }
-            } else if (lastSum > target) {
-                lastSum += can[i];
-                lastSum = sum(can, target, i + 1, lists, currentListIndex, lastSum);
-            } else {
-                ArrayList<Integer> newArray = new ArrayList<>();
-                lists.add(newArray);
-                lastSum = sum(can, target, i + 1, lists, currentListIndex + 1, 0);
+            actualSum += can[i];
+            if (actualSum < target) {
+                currentListIndex.add(can[i]);
+                sum(can, target, i, lists, currentListIndex, actualSum);
+                currentListIndex.remove(currentListIndex.size() - 1);
             }
+            if (actualSum == target) {
+                currentListIndex.add(can[i]);
+                ArrayList<Integer> integers = new ArrayList<>(currentListIndex);
+                lists.add(integers);
+                currentListIndex.remove(currentListIndex.size() - 1);
+            }
+            actualSum = lastSum;
         }
-        return lastSum;
     }
 
     public static void main(String[] args) {
-        System.out.println(combinationSum(new int[]{2, 3, 6, 7}, 7));
+        System.out.println(combinationSum(new int[]{1}, 2));
     }
 }
