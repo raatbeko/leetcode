@@ -9,25 +9,25 @@ public class Subsets {
     public static List<List<Integer>> subsets(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> lists = new ArrayList<>();
-        lists.add(new ArrayList<>());
         subset(nums, 0, lists, new ArrayList<>());
         return lists;
     }
 
     private static void subset(int[] nums, int next, List<List<Integer>> lists, List<Integer> integers) {
-        if (nums.length == next)
-            return;
+        lists.add(new ArrayList<>(integers));
 
         for (int i = next; i < nums.length; i++) {
-            integers.add(nums[i]);
-            lists.add(new ArrayList<>(integers));
+            if (i > next && nums[i] == nums[i - 1]) {
+                continue;
+            }
 
+            integers.add(nums[i]);
             subset(nums, i + 1, lists, new ArrayList<>(integers));
             integers.remove(integers.size() - 1);
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(subsets(new int[]{}));
+        System.out.println();
     }
 }

@@ -1,39 +1,33 @@
 package algorithms.medium;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LongestSubstringWithoutRepeatingCharacters {
 
     public static int lengthOfLongestSubstring(String s) {
-        if (s.length() == 1 || s.length() == 0)
-            return s.length();
-        Map<Character, Integer> index = new HashMap<>();
+        int n = s.length();
+        int maxLength = 0;
+        Set<Character> charSet = new HashSet<>();
+        int left = 0;
 
-        StringBuilder longest = new StringBuilder();
-        StringBuilder str = new StringBuilder();
-
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (!index.containsKey(ch)) {
-                index.put(ch, i);
-                str.append(ch);
+        for (int right = 0; right < n; right++) {
+            if (!charSet.contains(s.charAt(right))) {
+                charSet.add(s.charAt(right));
+                maxLength = Math.max(maxLength, right - left + 1);
             } else {
-                String sub = s.substring(index.get(ch), i);
-                if (sub.length() >= str.length()) {
-                    index.put(ch, i);
-                } else {
-                    if (longest.length() < str.length()){
-                        longest = str;
-                    }
-                    str = new StringBuilder(String.valueOf(ch));
+                while (charSet.contains(s.charAt(right))) {
+                    charSet.remove(s.charAt(left));
+                    left++;
                 }
+                charSet.add(s.charAt(right));
             }
         }
-        return longest.length();
+
+        return maxLength;
     }
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("pwwkew"));
+        System.out.println(lengthOfLongestSubstring("pwwkdfghjew"));
     }
 }
