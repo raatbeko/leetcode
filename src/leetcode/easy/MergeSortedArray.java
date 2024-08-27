@@ -10,39 +10,23 @@ public class MergeSortedArray {
         if (m == 0) {
             if (n >= 0) System.arraycopy(nums2, 0, nums1, 0, n);
         }
-        int length = m + n;
-        int l = length - n;
-        for (int i = 0; i < length; i++) {
-            if (n - 1 >= i) {
-                if (nums1[i] == nums2[i]) {
-                    int num = nums1[i + 1];
-                    nums1[i + 1] = nums2[i];
-                    nums1[m] = num;
-                    m++;
-                } else if (nums1[i] > nums1[i]) {
-                    int num = nums1[i];
-                    nums1[i] = nums2[i];
-                    nums1[m] = num;
-                    m++;
-                } else {
-                    nums1[m] = nums2[i];
-                    m++;
-                }
-                continue;
-            }
-            if (l == i)
-                l--;
-            if (l < length && nums1[l] > nums1[i]) {
-                int num = nums1[i];
-                nums1[i] = nums1[l];
-                nums1[l] = num;
-                l++;
+        int mStart = 0;
+        for (int i = 0; i < nums1.length; i++) {
+            if (m - 1 < i) {
+                nums1[i] = nums2[mStart];
+                mStart++;
+            } else if (nums1[i] > nums2[mStart]) {
+                int i1 = nums1[i];
+                nums1[i] = nums2[mStart];
+                nums2[mStart] = i1;
+                Arrays.sort(nums2);
             }
         }
-        System.out.println(Arrays.toString(nums1));
     }
 
     public static void main(String[] args) {
-        merge(new int[]{2,0}, 1, new int[]{1}, 1);
+        int[] ints = {4, 5, 6, 0, 0, 0};
+        merge(ints, 3, new int[]{1, 2, 3}, 3);
+        System.out.println(Arrays.toString(ints));
     }
 }
