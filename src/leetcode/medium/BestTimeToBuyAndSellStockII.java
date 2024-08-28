@@ -10,7 +10,7 @@ public class BestTimeToBuyAndSellStockII {
             if (price < minPrice) {
                 minPrice = price;
             }
-            if (price - minPrice > maxProfit) {
+            if (minPrice < price) {
                 maxProfit += price - minPrice;
                 minPrice = price;
             }
@@ -19,6 +19,6 @@ public class BestTimeToBuyAndSellStockII {
     }
 
     public static void main(String[] args) {
-        System.out.println(maxProfit(new int[]{7,1,5,3,3,3}));
+        System.out.println(maxProfit(new int[]{7,6,4,3,1}));
     }
 }
