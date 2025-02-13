@@ -3,8 +3,6 @@ package leetcode.medium;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import static java.lang.Math.max;
-
 public class MinimumOperationsToHalveArraySum {
 
 
@@ -22,7 +20,7 @@ public class MinimumOperationsToHalveArraySum {
      * В решении этой задачи я не знал в начале что делать. В Topics написано что PriorityQueue это решение. Я знал как оно работает и нашелся ответ сразу
      * <ul>
      *   <li><b>Время:</b> 209ms</li>
-     *   <li><i>Память:</i> 59.96MB</li>
+     *   <li><b>Память:</b> 59.96MB</li>
      * </ul>
      */
     public int halveArray(int[] nums) {
@@ -93,7 +91,7 @@ public class MinimumOperationsToHalveArraySum {
      * <p>
      * <ul>
      *   <li><b>Время:</b> 159ms</li>
-     *   <li><i>Память:</i> 71.30MB</li>
+     *   <li><b>Память:</b> 71.30MB</li>
      * </ul>
      */
     public int minOperations(int[] nums, int k) {
