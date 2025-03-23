@@ -2,29 +2,25 @@ package leetcode.easy;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class TwoSum {
 
     public static int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> twoSum = new HashMap<>();
+        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>();
+        int x = 0;
         for (int i = 0; i < nums.length; i++) {
-            for (var item : twoSum.entrySet()) {
-                if (item.getValue() + nums[i] == target){
-                    return new int[]{item.getKey(), i};
-                }
-            }
-            if (nums[i] <= target){
-                twoSum.put(i, nums[i]);
-            }
-            if (nums[i] < 0 && nums[i] >= target){
-                twoSum.put(i, nums[i]);
+            x = target - nums[i];
+            if (integerIntegerHashMap.containsKey(x)) {
+                Integer i1 = integerIntegerHashMap.get(x);
+                return new int[]{i1, i};
+            } else {
+                integerIntegerHashMap.put(nums[i], i);
             }
         }
-        return new int[0];
+        return null;
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(twoSum(new int[]{-1,-2,-3,-4,-5}, -8)));
+        System.out.println(Arrays.toString(twoSum(new int[]{2,7,11,15}, 9)));
     }
 }

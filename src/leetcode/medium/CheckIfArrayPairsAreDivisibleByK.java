@@ -3,7 +3,7 @@ package leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckIfArrayPairsAreDivisibleByK {
+public class  CheckIfArrayPairsAreDivisibleByK {
 
     public static boolean canArrange(int[] arr, int k) {
         Map<Integer, Integer> keyAndCount = new HashMap<>();
