@@ -15,26 +15,30 @@ public class MaximumValueOfAnOrderedTripletII {
                 currentDo = kDo;
             }
         }
-        int jMinVal = Integer.MAX_VALUE;
+        int iMaxVal = Integer.MIN_VALUE;
         int end = currentDo;
-        for (int jDo = j; jDo < currentDo; jDo++) {
-            if (jMinVal >= nums[jDo]) {
-                jMinVal = nums[jDo];
-                end = jDo;
+        for (int iDo = 0; iDo < currentDo - 1; iDo++) {
+            if (iMaxVal < nums[iDo]) {
+                iMaxVal = nums[iDo];
+                iMaxVal = Math.max(nums[iDo], iMaxVal);
+                end = iDo;
             }
         }
 
-        int iMaxVal = Integer.MIN_VALUE;
-        for (int iDo = 0; iDo < end; iDo++) {
-            iMaxVal = Math.max(nums[iDo], iMaxVal);
+        int jMinVal = Integer.MAX_VALUE;
+        for (int jDo = end == 0 ? 1 : end; jDo < currentDo; jDo++) {
+            if (jMinVal >= nums[jDo]) {
+                jMinVal = nums[jDo];
+            }
         }
+
         long max = (long) (iMaxVal - jMinVal) * kMaxVal;
         return Math.max(0, max);
     }
 
     public static void main(String[] args) {
         MaximumValueOfAnOrderedTripletII maximumValueOfAnOrderedTripletII = new MaximumValueOfAnOrderedTripletII();
-        System.out.println(maximumValueOfAnOrderedTripletII.maximumTripletValue(new int[]{8, 6, 3, 13, 2, 12, 19, 5, 19, 6, 10, 11, 9}));
+        System.out.println(maximumValueOfAnOrderedTripletII.maximumTripletValue(new int[]{6, 14, 20, 19, 19, 10, 3, 15, 12, 13, 8, 1, 2, 15, 3}));
 
     }
 }
