@@ -8,21 +8,55 @@ public class MergeSortedArray {
         if (n == 0)
             return;
         if (m == 0) {
-            if (n >= 0) System.arraycopy(nums2, 0, nums1, 0, n);
+            if (n >= 0) {
+                System.arraycopy(nums2, 0, nums1, 0, n);
+            }
         }
-        int mStart = 0;
+        int nStart = 0;
         for (int i = 0; i < nums1.length; i++) {
             if (m - 1 < i) {
-                nums1[i] = nums2[mStart];
-                mStart++;
-            } else if (nums1[i] > nums2[mStart]) {
+                nums1[i] = nums2[nStart];
+                nStart++;
+            } else if (nums1[i] > nums2[nStart]) {
                 int i1 = nums1[i];
-                nums1[i] = nums2[mStart];
-                nums2[mStart] = i1;
-                Arrays.sort(nums2);
+                nums1[i] = nums2[nStart];
+                nums2[nStart] = i1;
+                findYouPlace(nums2);
             }
         }
     }
+
+    private static void findYouPlace(int[] nums2) {
+        if (nums2.length == 1) return;
+
+        for (int i = 1; i < nums2.length; i++) {
+            if (nums2[i - 1] > nums2[i]) {
+                int val = nums2[i - 1];
+                nums2[i - 1] = nums2[i];
+                nums2[i] = val;
+            }
+        }
+    }
+
+//    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+//        if (n == 0)
+//            return;
+//        if (m == 0) {
+//            if (n >= 0) System.arraycopy(nums2, 0, nums1, 0, n);
+//        }
+//        int mStart = 0;
+//        for (int i = 0; i < nums1.length; i++) {
+//            if (m - 1 < i) {
+//                nums1[i] = nums2[mStart];
+//                mStart++;
+//            } else if (nums1[i] > nums2[mStart]) {
+//                int i1 = nums1[i];
+//                nums1[i] = nums2[mStart];
+//                nums2[mStart] = i1;
+//                Arrays.sort(nums2);
+//            }
+//        }
+//    }
 
     public static void main(String[] args) {
         int[] ints = {4, 5, 6, 0, 0, 0};
