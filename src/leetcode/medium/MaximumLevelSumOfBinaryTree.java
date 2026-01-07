@@ -2,8 +2,7 @@ package leetcode.medium;
 
 import structure.binaryTree.TreeNode;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class MaximumLevelSumOfBinaryTree {
 
@@ -11,7 +10,7 @@ public class MaximumLevelSumOfBinaryTree {
     static int maxSum = Integer.MIN_VALUE;
 
     public static int maxLevelSum(TreeNode root) {
-        TreeMap<Integer, Integer> integerIntegerHashMap = new TreeMap<>();
+        Map<Integer, Integer> integerIntegerHashMap = new HashMap<>();
         count(integerIntegerHashMap, 1, root);
 
         for (Map.Entry<Integer, Integer> integerIntegerEntry : integerIntegerHashMap.entrySet()) {
@@ -27,6 +26,7 @@ public class MaximumLevelSumOfBinaryTree {
         if (root == null) return;
 
         levelAndSum.put(level, levelAndSum.getOrDefault(level, 0) + root.val);
+
         count(levelAndSum, level + 1, root.left);
         count(levelAndSum, level + 1, root.right);
     }
