@@ -2,20 +2,27 @@ package leetcode.medium;
 
 import leetcode.easy.ListNode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RemoveNthNodeFromEndOfList {
 
-    public static ListNode removeNthFromEnd(ListNode head, int n) {
-        List<ListNode> nodes = new ArrayList<>();
-        ListNode slow = head;
-        while (slow != null) {
-            nodes.add(slow);
-            slow = slow.next;
+    int length;
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) {
+            length--;
+            return null;
         }
-        if (nodes.size() > 1){
+
+        length = n;
+        ListNode listNode = removeNthFromEnd(head.next, n);
+        if (length == 0) {
+            length--;
+            return listNode;
+        } else if (length == -1) {
+            head.next = listNode;
+        } else {
+            length--;
         }
+
         return head;
     }
 
@@ -25,7 +32,7 @@ public class RemoveNthNodeFromEndOfList {
         listNode.next.next = new ListNode(3);
         listNode.next.next.next = new ListNode(4);
         listNode.next.next.next.next = new ListNode(5);
-        System.out.println(removeNthFromEnd(listNode, 1));
+        System.out.println(new RemoveNthNodeFromEndOfList().removeNthFromEnd(listNode, 3));
     }
 
 
