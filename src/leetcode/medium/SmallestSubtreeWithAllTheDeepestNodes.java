@@ -5,23 +5,22 @@ import structure.binaryTree.TreeNode;
 public class SmallestSubtreeWithAllTheDeepestNodes {
 
     public TreeNode subtreeWithAllDeepest(TreeNode root) {
-        return find(maxDepth(root), 1, root);
+        return find(root);
     }
 
-    public TreeNode find(int maxDepth, int level, TreeNode root) {
+    public TreeNode find(TreeNode root) {
         if (root == null) return null;
-        if (maxDepth-1 == level){
+
+        int leftCount = maxDepth(root.left);
+        int rightCount = maxDepth(root.right);
+
+        if (leftCount == rightCount) {
             return root;
         }
-
-        TreeNode left = find(maxDepth, level+1, root.left);
-        TreeNode right = find(maxDepth, level+1, root.right);
-
-        if (left != null && right != null){
-            return root;
+        if (leftCount > rightCount) {
+            return find(root.left);
         }
-
-        return left != null ? left : right;
+        return find(root.right);
     }
 
     public int maxDepth(TreeNode root) {
