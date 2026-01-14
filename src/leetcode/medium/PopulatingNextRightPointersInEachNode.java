@@ -4,37 +4,64 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class PopulatingNextRightPointersInEachNode {
+//    public static Node connect(Node root) {
+//        if (null == root) return null;
+//        Queue<Node> nodes = new ArrayDeque<>();
+//        nodes.add(root);
+//        ArrayDeque<Node> child = new ArrayDeque<>();
+//        Node prev = null;
+//
+//        while (!nodes.isEmpty()) {
+//            Node poll = nodes.poll();
+//
+//            if (poll.left != null) {
+//                child.add(poll.left);
+//                if (prev != null) {
+//                    prev.next = poll.left;
+//                }
+//
+//                prev = poll.left;
+//            }
+//            if (poll.right != null) {
+//                child.add(poll.right);
+//                if (prev != null) {
+//                    prev.next = poll.right;
+//                }
+//
+//                prev = poll.right;
+//            }
+//
+//            if (nodes.isEmpty()) {
+//                prev = null;
+//                nodes = child;
+//                child = new ArrayDeque<>();
+//            }
+//        }
+//
+//        return root;
+//    }
+
     public static Node connect(Node root) {
         if (null == root) return null;
         Queue<Node> nodes = new ArrayDeque<>();
         nodes.add(root);
-        ArrayDeque<Node> child = new ArrayDeque<>();
-        Node prev = null;
 
         while (!nodes.isEmpty()) {
-            Node poll = nodes.poll();
+            int length = nodes.size();
+            Node prev = null;
+            for (int i = 0; i < length; i++) {
+                Node next = nodes.poll();
 
-            if (poll.left != null) {
-                child.add(poll.left);
-                if (prev != null) {
-                    prev.next = poll.left;
+                if (next.left != null) {
+                    nodes.add(next.left);
                 }
-
-                prev = poll.left;
-            }
-            if (poll.right != null) {
-                child.add(poll.right);
-                if (prev != null) {
-                    prev.next = poll.right;
+                if (next.right != null) {
+                    nodes.add(next.right);
                 }
-
-                prev = poll.right;
-            }
-
-            if (nodes.isEmpty()) {
-                prev = null;
-                nodes = child;
-                child = new ArrayDeque<>();
+                if (prev != null) {
+                    prev.next = next;
+                }
+                prev = next;
             }
         }
 
